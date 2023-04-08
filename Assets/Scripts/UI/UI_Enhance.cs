@@ -43,7 +43,8 @@ public class UI_Enhance : MonoBehaviour
         {
             if (GameManager.instance.n_Gold >= enhance.need_Gold)
             {
-                SoundManager.instance.PlayEffect("Enhance");
+                //SoundManager.instance.PlayEffect("Enhance");
+                Managers.Sound.Play("Enhance");
                 StartCoroutine(GUIManager.instance.NumberAnimation(GameManager.instance.n_Gold - enhance.need_Gold, GameManager.instance.n_Gold, E_VALUE.GOLD));
                 GameManager.instance.n_Gold -= enhance.need_Gold;
                 switch (type)

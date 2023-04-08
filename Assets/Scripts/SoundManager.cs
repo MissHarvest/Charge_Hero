@@ -3,8 +3,15 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using System.Collections.Generic;
 
+public enum SoundType { Bgm, Effect, MaxCount }
 public class SoundManager : MonoBehaviour
 {
+    AudioSource[] _audioSources = new AudioSource[(int)SoundType.MaxCount];
+    Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
+    
+    enum BGMSound { TitleBGM, SceneBGM, PlayBGM, BossBGM }
+    enum EffectSound { Click, Jump, GetCoin, Enhance, Attack, Attacked, Fail, Clear }
+
     public static SoundManager instance;
 
     public Slider MasterSlider;
@@ -20,10 +27,96 @@ public class SoundManager : MonoBehaviour
     public AudioSource BG_AudioSource;
     public AudioSource Effect_AudioSource;
 
-    Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
-    enum BGMSound { TitleBGM, SceneBGM, PlayBGM, BossBGM }
-    enum EffectSound { Click, Jump, GetCoin, Enhance, Attack, Attacked, Fail, Clear } 
+    public void Init()
+    {
+        GameObject root = GameObject.Find("@Sound");
+        if(root == null)
+        {
+            root = new GameObject { name = "@Sound" };
+            Object.DontDestroyOnLoad(root);
 
+            string[] soundTypeNames = System.Enum.GetNames(typeof(SoundType));
+            for(int i = 0; i < soundTypeNames.Length - 1; i++)
+            {
+                GameObject go = new GameObject { name = soundTypeNames[i] };
+                _audioSources[i] = go.AddComponent<AudioSource>();
+                go.transform.parent = root.transform;
+            }
+            _audioSources[(int)SoundType.Bgm].loop = true;
+        }
+    }
+    public void Clear()
+    {
+        foreach(AudioSource audioSource in _audioSources)
+        {
+            audioSource.clip = null;
+            audioSource.Stop();
+        }
+
+        _audioClips.Clear();
+    }
+    public void Play(AudioClip audioClip, SoundType type = SoundType.Effect, float pitch = 1.0f)
+    {
+        if(audioClip == null)
+        {
+            Debug.LogError("AudioClip is null");
+            return;
+        }
+
+        if(type == SoundType.Bgm)
+        {
+            AudioSource audioSource = _audioSources[(int)SoundType.Bgm];
+            
+            if(audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+
+            audioSource.pitch = pitch;
+            audioSource.clip = audioClip;
+            audioSource.Play();
+        }
+        else
+        {
+            AudioSource audioSource = _audioSources[(int)SoundType.Effect];
+            audioSource.pitch = pitch;
+            audioSource.PlayOneShot(audioClip);
+        }
+    }
+    public void Play(string path, SoundType type = SoundType.Effect, float pitch = 1.0f)
+    {
+        AudioClip audioClip = GetOrAddAudioClip(path, type);
+        Play(audioClip, type, pitch);
+        // Define.Scene d = Define.Scene.Home;
+    }
+    AudioClip GetOrAddAudioClip(string path, SoundType type = SoundType.Effect)
+    {
+        if(path.Contains("Sounds/") == false)
+            path = $"Sounds/{path}";
+
+        AudioClip audioClip = null;
+
+        if(type == SoundType.Bgm)
+        {
+            audioClip = Resources.Load<AudioClip>(path); // Managers.Resource.Load
+        }
+        else
+        {
+            if(_audioClips.TryGetValue(path,out audioClip) == false)
+            {
+                audioClip = Resources.Load<AudioClip>(path);
+                _audioClips.Add(path, audioClip);
+            }
+        }
+
+        if(audioClip == null)
+        {
+            Debug.Log($"AudioClip Missing! {path}");
+        }
+
+        return audioClip;
+    }
+    // 아래 제거 //
     private void Awake()
     {
         if (instance == null)
@@ -115,73 +208,5 @@ public class SoundManager : MonoBehaviour
     public void ToggleAudioVolume()
     {
         AudioListener.volume = AudioListener.volume == 0 ? 1 : 0;
-    //}
-    //public void Play(string name, float pitch = 1.0f)
-    //{
-    //    //audio_Effects[0].Pause();
-    //    //audio_Effects[0].Play();
-    //    //audio_Effects[0].PlayOneShot();
-    //    //audio_Effects[0].
-    //}
-    //public void Event_ClickSound()
-    //{
-    //    //AudioSource audioS = new AudioSource();
-    //    //audioS.PlayOneShot(audioClip);
-    //    Effect_AudioSource.clip = Click_Clip;
-    //    Effect_AudioSource.Play();
-    //}
-    //public void Event_JumpSound()
-    //{
-    //    //Event_RunSound_Stop();
-
-    //    Effect_AudioSource.clip = Jump_Clip;
-    //    Effect_AudioSource.Play();
-    //}
-    ////public void Event_RunSound()
-    ////{
-    ////    Player_Run_AudioSource.Play();
-    ////}
-    ////public void Event_RunSound_Stop()
-    ////{
-    ////    Player_Run_AudioSource.Pause();
-    ////}
-    //public void Event_GetItemSound()
-    //{
-    //    Effect_AudioSource.clip = GetItem_Clip;
-    //    Effect_AudioSource.Play();
-    //}
-    //public void Mute_All(bool mute)
-    //{
-        //Mute_BG(mute);
-        //Mute_Effect(mute);
-    //}
-    //public void Mute_BG(bool mute)
-    //{
-    //    for(int i = 0; i<audio_BackGrounds.Length; i++)
-    //    {
-    //        audio_BackGrounds[i].mute = mute;
-    //    }
-    //}
-    //public void Mute_Effect(bool mute)
-    //{
-    //    for (int i = 0; i < audio_Effects.Length; i++)
-    //    {
-    //        audio_Effects[i].mute = mute;
-    //    }
-    //}
-    //public void SETVOLUME(int idx)
-    //{
-    //    switch (idx)
-    //    {
-    //        case 0:
-    //            AudioListener.volume = m_volume.value;
-    //            break;
-    //        case 1:
-    //            _back.volume = b_volume.value;
-    //            break;
-    //        case 2:
-    //            _effect.volume = e_volume.value;
-    //            break;
-    //    }        
     }
 }

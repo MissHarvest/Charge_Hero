@@ -21,6 +21,11 @@ public class JumpButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         isDown = true;
+        
+        // GameManager.instance.go_Player.GetComponent<PlayerControl>().isJumpBtnDown = true;
+        // 일단 isJumpBtnDown 이 private 이다.
+        // 버튼이 눌릴 때 마다 실행되야 하는 함수가 늘어나면 
+        // 여기 부분이 늘어난다.
 
         buttonCb?.Invoke(isDown);
     }

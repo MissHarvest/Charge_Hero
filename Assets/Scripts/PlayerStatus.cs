@@ -43,7 +43,8 @@ public class PlayerStatus : MonoBehaviour
             if (HP <= 0)
             {
                 control.anim.SetTrigger("doDie");
-                SoundManager.instance.PlayEffect("Fail");
+                //SoundManager.instance.PlayEffect("Fail");
+                Managers.Sound.Play("Fail");
                 SoundManager.instance.OffBGM();
                 control.ChangeState(PlayerControl.E_State.End);
             }

@@ -250,7 +250,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (jumpCnt < 2 && ((int)state <= (int)E_State.JumpDown))
         {
-            SoundManager.instance.PlayEffect("Jump");
+            //SoundManager.instance.PlayEffect("Jump");
+            Managers.Sound.Play("Jump");
             //Debug.Log("State(" + state + ")_Jump" + jumpCnt);
             anim.SetBool("isSlide", false);
             switch(jumpCnt)

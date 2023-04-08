@@ -130,22 +130,26 @@ public class GUIManager : MonoSingleton<MonoBehaviour>
     }
     void SceneChange(E_Scene scene)
     {
-        SoundManager.instance.PlayEffect("Click");
+        //SoundManager.instance.PlayEffect("Click");
+        Managers.Sound.Play("Click");
         this.cur_Scene = scene;
         switch (scene)
         {
             case E_Scene.TITLE:
-                SoundManager.instance.PlayBGM("TitleBGM");
+                //SoundManager.instance.PlayBGM("TitleBGM");
+                Managers.Sound.Play("TitleBGM", SoundType.Bgm);
                 break;
             case E_Scene.CHAPTER:
-                SoundManager.instance.PlayBGM("SceneBGM");
+                //SoundManager.instance.PlayBGM("SceneBGM");
+                Managers.Sound.Play("SceneBGM", SoundType.Bgm);
                 //SetResolutions();
                 int chap = GameManager.instance.ply_Chapter;
                 ui_block_Managers[0].Activate_To(chap);
                 //SetResolutions();
                 break;
             case E_Scene.STAGE:
-                SoundManager.instance.PlayBGM("SceneBGM");
+                //SoundManager.instance.PlayBGM("SceneBGM");
+                Managers.Sound.Play("SceneBGM", SoundType.Bgm);
                 if (ui_block_Managers[1].LinkData(GameManager.instance.chapter))
                 {
                     if (GameManager.instance.ply_Chapter > GameManager.instance.chapter) ui_block_Managers[1].Activate_ALL();
@@ -219,19 +223,22 @@ public class GUIManager : MonoSingleton<MonoBehaviour>
     {
         SceneManager.LoadScene(GameManager.instance.map);
         //Event_OffResult();
-        SoundManager.instance.PlayEffect("Click");
+        //SoundManager.instance.PlayEffect("Click");
+        Managers.Sound.Play("Click");
         Event_Quit_Window();
         //Event_Next();
     }
     public void Event_ShowSetting()
     {
-        SoundManager.instance.PlayEffect("Click");
+        //SoundManager.instance.PlayEffect("Click");
+        Managers.Sound.Play("Click");
         list_Window[0].SetActive(!list_Window[0].activeSelf);
         if (list_Window[1].activeSelf) list_Window[1].SetActive(false);
     }
     public void Event_PauseSetting()
     {
-        SoundManager.instance.PlayEffect("Click");
+        //SoundManager.instance.PlayEffect("Click");
+        Managers.Sound.Play("Click");
         if (list_Window[0].activeSelf)
         {
             list_Window[0].SetActive(false);
@@ -273,7 +280,8 @@ public class GUIManager : MonoSingleton<MonoBehaviour>
         yield return new WaitForSeconds(1);
         if((E_Window)idx == E_Window.Clear)
         {
-            SoundManager.instance.PlayEffect("Clear");
+            //SoundManager.instance.PlayEffect("Clear");
+            Managers.Sound.Play("Clear");
         }
         list_Window[idx].SetActive(true);
         list_Window[idx].GetComponent<UI_Result>().Set(cnt, gold);

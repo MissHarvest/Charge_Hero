@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4B9BCF4F-9E6C-B6C1-DFFE-BA1EFAF3D90C}</ProjectGuid>
+    <ProjectGuid>{271A4559-D8A8-BB33-C4E9-9BD6589E42FE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -66,8 +66,10 @@
     <Compile Include="Assets\Scripts\DeadLine.cs" />
     <Compile Include="Assets\Scripts\Manager\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
+    <Compile Include="Assets\Managers.cs" />
     <Compile Include="Assets\Scripts\UI\JumpButton.cs" />
     <Compile Include="Assets\Scripts\Ref_Sound.cs" />
+    <Compile Include="Assets\ResourceManager.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Distance.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Result.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="Assets\Scripts\UI\UI_Star.cs" />
     <Compile Include="Assets\Scripts\Manager\CustomAttribute\ReadOnlyAttribute.cs" />
     <Compile Include="Assets\Scripts\Manager\CustomAttribute\ButtonAttribute.cs" />
+    <Compile Include="Assets\InputManager.cs" />
     <Compile Include="Assets\Scripts\ChangeCoin.cs" />
     <Compile Include="Assets\Scripts\Companion.cs" />
     <Compile Include="Assets\Scripts\Manager\CustomAttribute\HorizontalLineAttribute.cs" />
@@ -100,6 +103,18 @@
     <Compile Include="Assets\Scripts\BuffTimer.cs" />
     <Compile Include="Assets\Scripts\PlayerStatus.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Enhance.cs" />
+    <Compile Include="Assets\BaseScene.cs" />
+    <Compile Include="Assets\Define.cs" />
+    <Compile Include="Assets\HomeScene.cs" />
+    <Compile Include="Assets\GameScene.cs" />
+    <Compile Include="Assets\UI_Base.cs" />
+    <Compile Include="Assets\UI_Popup.cs" />
+    <Compile Include="Assets\UIManager.cs" />
+    <Compile Include="Assets\Util.cs" />
+    <Compile Include="Assets\UI_Scene.cs" />
+    <Compile Include="Assets\UI_GameplayPanel.cs" />
+    <Compile Include="Assets\UI_EventHandler.cs" />
+    <Compile Include="Assets\Extension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\JsonDotNet\link.xml" />

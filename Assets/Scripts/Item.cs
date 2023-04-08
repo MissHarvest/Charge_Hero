@@ -71,7 +71,8 @@ public class Item : MonoBehaviour
                 break;
 
             case ItemType.Gold: // °ñµå
-                SoundManager.instance.PlayEffect("GetCoin");
+                //SoundManager.instance.PlayEffect("GetCoin");
+                Managers.Sound.Play("GetCoin");
                 GameManager.instance.n_Gold += value;
                 break;
         }

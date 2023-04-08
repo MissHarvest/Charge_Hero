@@ -156,6 +156,8 @@ public class GameManager : MonoBehaviour
             player_prefab = Resources.Load<GameObject>("Prefabs/Player");
 
             SceneManager.sceneLoaded += LoadScene;
+            //SceneManager.LoadScene();
+
             //SceneManager.sceneUnloaded += UnLoadScene;
 
             DontDestroyOnLoad(this.gameObject);
@@ -257,11 +259,13 @@ public class GameManager : MonoBehaviour
             default:
                 if (scene.name == "1-5")
                 {
-                    SoundManager.instance.PlayBGM("BossBGM");
+                    //SoundManager.instance.PlayBGM("BossBGM");
+                    Managers.Sound.Play("BossBGM", SoundType.Bgm);
                 }
                 else
                 {
-                    SoundManager.instance.PlayBGM("PlayBGM");
+                    //SoundManager.instance.PlayBGM("PlayBGM");
+                    Managers.Sound.Play("PlayBGM", SoundType.Bgm);
                 }
                 SetPlayer();// 굳이 동적 할당 해야할까? //
                 StageManager.instance.Set();
@@ -271,7 +275,8 @@ public class GameManager : MonoBehaviour
     public void SetPlayer()
     {
         // Player Prefab 생성 및 배치.
-        go_Player = Instantiate(player_prefab);
+        //go_Player = Instantiate(player_prefab);
+        go_Player = Managers.Resource.Instantiate("Player");
         Debug.Log("Creat Player in " + SceneManager.GetActiveScene().name);
         followCam.go_Player = go_Player;
         go_Player.GetComponent<PlayerControl>().cam = followCam;
