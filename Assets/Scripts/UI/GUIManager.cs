@@ -165,7 +165,7 @@ public class GUIManager : MonoSingleton<MonoBehaviour>
                 txt_Gold.text = string.Format("{0:#,##0} G", GameManager.instance.n_Gold);
                 
                 // Enhance UI √ ±‚»≠ //
-                for (int i = 0; i < 3; i++) ui_Enhances[i].Init();
+                // for (int i = 0; i < 3; i++) ui_Enhances[i].Init();
                 //SetResolutions();
                 break;
             case E_Scene.PLAY:

@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class UI_BlockManager : MonoBehaviour
 {// UI_StageManager.
-    public UI_Block[] list_ChildUI;
+    public UI_Stage[] list_ChildUI;
     // Start is called before the first frame update
     private void Awake()
     {
-        list_ChildUI = GetComponentsInChildren<UI_Block>();
+        list_ChildUI = GetComponentsInChildren<UI_Stage>();
     }
     void Start()
     {
@@ -21,7 +21,7 @@ public class UI_BlockManager : MonoBehaviour
         for (int i = 0; i < list_ChildUI.Length; i++)
         { // num = 1
             if (i >= num) return;
-            list_ChildUI[i].Event_Able();
+            //list_ChildUI[i].Event_Able();
         }
     }
     public bool LinkData(int chapter)
@@ -30,7 +30,7 @@ public class UI_BlockManager : MonoBehaviour
         {
             int idx = GameManager.instance.GetIndex(chapter, i + 1);
             //Debug.Log("LinkData" + idx);
-            if (list_ChildUI[i].SetData(idx) == false) return false;
+            //if (list_ChildUI[i].SetData(idx) == false) return false;
         }
         return true;
     }
@@ -38,14 +38,14 @@ public class UI_BlockManager : MonoBehaviour
     {
         for (int i = 0; i < list_ChildUI.Length; i++)
         {
-            list_ChildUI[i].Event_Able();
+            //list_ChildUI[i].Event_Able();
         }
     }
     void Deactivate_ALL()
     {
         for (int i = 0; i < list_ChildUI.Length; i++)
         {
-            list_ChildUI[i].Event_Unable();
+            //list_ChildUI[i].Event_Unable();
         }
     }
 }

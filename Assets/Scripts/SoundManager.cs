@@ -4,7 +4,7 @@ using UnityEngine.Audio;
 using System.Collections.Generic;
 
 public enum SoundType { Bgm, Effect, MaxCount }
-public class SoundManager : MonoBehaviour
+public class SoundManager// : MonoBehaviour
 {
     AudioSource[] _audioSources = new AudioSource[(int)SoundType.MaxCount];
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
@@ -12,6 +12,8 @@ public class SoundManager : MonoBehaviour
     enum BGMSound { TitleBGM, SceneBGM, PlayBGM, BossBGM }
     enum EffectSound { Click, Jump, GetCoin, Enhance, Attack, Attacked, Fail, Clear }
 
+
+    // 제거 ->> //
     public static SoundManager instance;
 
     public Slider MasterSlider;
@@ -26,6 +28,7 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource BG_AudioSource;
     public AudioSource Effect_AudioSource;
+    // <<- 여기까지 // 
 
     public void Init()
     {
@@ -117,36 +120,36 @@ public class SoundManager : MonoBehaviour
         return audioClip;
     }
     // 아래 제거 //
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-            AudioClip audioclip = null;
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //        Object.DontDestroyOnLoad(this.gameObject);
+    //        AudioClip audioclip = null;
 
-            // BGM AudioClip Set //
-            string[] bgmNames = System.Enum.GetNames(typeof(BGMSound));            
-            for (int i = 0; i < bgmNames.Length; i++)
-            {
-                string path = string.Format($"Sound/{bgmNames[i]}");
-                audioclip = Resources.Load<AudioClip>(path);
-                _audioClips.Add(bgmNames[i], audioclip);
-            }
-            BG_AudioSource.loop = true;
+    //        // BGM AudioClip Set //
+    //        string[] bgmNames = System.Enum.GetNames(typeof(BGMSound));            
+    //        for (int i = 0; i < bgmNames.Length; i++)
+    //        {
+    //            string path = string.Format($"Sound/{bgmNames[i]}");
+    //            audioclip = Resources.Load<AudioClip>(path);
+    //            _audioClips.Add(bgmNames[i], audioclip);
+    //        }
+    //        BG_AudioSource.loop = true;
 
-            // Effect AudioClip Set //
-            string[] effectNames = System.Enum.GetNames(typeof(EffectSound));
-            for (int i = 0; i < effectNames.Length; i++)
-            {
-                string path = string.Format($"Sound/{effectNames[i]}");
-                audioclip = Resources.Load<AudioClip>(path);
-                _audioClips.Add(effectNames[i], audioclip);
-            }
-        }
-        else
-            Destroy(this.gameObject);
-    }
+    //        // Effect AudioClip Set //
+    //        string[] effectNames = System.Enum.GetNames(typeof(EffectSound));
+    //        for (int i = 0; i < effectNames.Length; i++)
+    //        {
+    //            string path = string.Format($"Sound/{effectNames[i]}");
+    //            audioclip = Resources.Load<AudioClip>(path);
+    //            _audioClips.Add(effectNames[i], audioclip);
+    //        }
+    //    }
+    //    else
+    //        Destroy(this.gameObject);
+    //}
     private void Start()
     {
         // Volume 초기값 설정 //

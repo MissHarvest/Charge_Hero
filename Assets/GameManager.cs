@@ -15,7 +15,7 @@ public struct Status
     public int def_cnt;
 }
 [Serializable]
-public struct Enhance
+public class Enhance : DB
 {
     public int stat;
     public int need_Gold;
@@ -25,8 +25,12 @@ public struct Enhance
         this.need_Gold = gold;
     }
 }
+[Serializable] public class AtkEnhance : Enhance { }
+[Serializable] public class HpEnhance : Enhance { }
+[Serializable] public class ShieldEnhance : Enhance { }
+
 [Serializable]
-public class Chapter
+public class __Chapter
 {
     public int stars;
     int need_Cnt = 10;
@@ -46,29 +50,6 @@ public class Chapter
 
 // chapter cnt 에 대한 변수 Define
 [Serializable]
-public class Stage
-{
-    public int idx;
-    public string name;
-    public int getStar;
-    public float percent;
-    public bool repeat;
-    public bool isClear;
-    // public int clearGold
-    public int first_Gold;
-    public int repeat_Gold;
-    public int bossHP;
-    public string questType;
-    public void Update_Info(int cnt, float percent, bool kill)
-    {
-        repeat = true;
-        if (cnt > getStar) this.getStar = cnt;
-        if (isClear != kill) isClear = true;
-        if (kill) this.percent = 1;
-        else if (percent > this.percent) this.percent = percent;     
-    }
-}
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -176,7 +157,7 @@ public class GameManager : MonoBehaviour
             chapters[i] = new Chapter();
             for (int j = 0; j < 5; j++)
             {
-                chapters[i].Link_with(stages[i * 5 + j]);
+                // chapters[i].Link_with(stages[i * 5 + j]);
             }
         }
     }
@@ -186,44 +167,44 @@ public class GameManager : MonoBehaviour
         en_ATK = DBLoader.Instance.atkenhance;
         en_DEF = DBLoader.Instance.defenhance;
     }
-    public Enhance GetEnhanceInfo(E_Status type)
-    {
-        Enhance en = new Enhance();
-        en.Set(0, 0);
-        switch (type)
-        {
-            case E_Status.HP:
-                if(status.Lv_HP < en_HP.Length)
-                    en = en_HP[status.Lv_HP];
-                break;
-            case E_Status.ATK:
-                if (status.Lv_ATK < en_ATK.Length)
-                    en = en_ATK[status.Lv_ATK];
-                break;
-            case E_Status.DEF:
-                if (status.Lv_DEF < en_DEF.Length)
-                    en = en_DEF[status.Lv_DEF];
-                break;
-        }
-        return en;
-    }
-    public string GetStatusInfo(E_Status type)
-    {
-        string info = null;
-        switch (type)
-        {
-            case E_Status.HP:
-                info = string.Format($"Lv.{status.Lv_HP} HP {status.hp}");
-                break;
-            case E_Status.ATK:
-                info = string.Format($"Lv.{status.Lv_ATK} ATK {status.atk}");
-                break;
-            case E_Status.DEF:
-                info = string.Format($"Lv.{status.Lv_DEF} DEF {status.def_cnt}");
-                break;
-        }
-        return info;
-    }
+    //public Enhance GetEnhanceInfo(E_Status type)
+    //{
+    //    Enhance en = new Enhance();
+    //    en.Set(0, 0);
+    //    switch (type)
+    //    {
+    //        case E_Status.HP:
+    //            if(status.Lv_HP < en_HP.Length)
+    //                en = en_HP[status.Lv_HP];
+    //            break;
+    //        case E_Status.ATK:
+    //            if (status.Lv_ATK < en_ATK.Length)
+    //                en = en_ATK[status.Lv_ATK];
+    //            break;
+    //        case E_Status.DEF:
+    //            if (status.Lv_DEF < en_DEF.Length)
+    //                en = en_DEF[status.Lv_DEF];
+    //            break;
+    //    }
+    //    return en;
+    //}
+    //public string GetStatusInfo(E_Status type)
+    //{
+    //    string info = null;
+    //    switch (type)
+    //    {
+    //        case E_Status.HP:
+    //            info = string.Format($"Lv.{status.Lv_HP} HP {status.hp}");
+    //            break;
+    //        case E_Status.ATK:
+    //            info = string.Format($"Lv.{status.Lv_ATK} ATK {status.atk}");
+    //            break;
+    //        case E_Status.DEF:
+    //            info = string.Format($"Lv.{status.Lv_DEF} DEF {status.def_cnt}");
+    //            break;
+    //    }
+    //    return info;
+    //}
     private void Start()
     {
         Debug.Log("GameManager_Start");
@@ -297,12 +278,12 @@ public class GameManager : MonoBehaviour
             stage++;
             if (ply_Chapter == chapter && ply_Stage < stage) ply_Stage = stage;
         }
-        if (chapters[ply_Chapter - 1].isEnough)
-        {
-            ply_Chapter++;
-            ply_Stage = 1;
-            chapter = ply_Chapter;
-        }
+        //if (chapters[ply_Chapter - 1].isEnough)
+        //{
+        //    ply_Chapter++;
+        //    ply_Stage = 1;
+        //    chapter = ply_Chapter;
+        //}
     }
     public Stage GetStageData()
     {

@@ -11,4 +11,10 @@ public class Define
         Click,
         Drag,
     }
+    public enum E_Status
+    {
+        HP,
+        ATK,
+        SHIELD,
+    }
 }

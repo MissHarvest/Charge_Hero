@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_Star : MonoBehaviour
+public class UI_Star : UI_Base
 {
+    protected override void Init()
+    {
+        // throw new System.NotImplementedException();
+    }
     public GameObject[] Stars;
     // Start is called before the first frame update
     void Start()

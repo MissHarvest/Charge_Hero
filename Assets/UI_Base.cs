@@ -9,7 +9,6 @@ public abstract class UI_Base : MonoBehaviour
 {
     protected Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
     protected abstract void Init();
-
     protected void Bind<T>(Type type) where T : UnityEngine.Object
     {
         string[] name = Enum.GetNames(type);
@@ -26,8 +25,7 @@ public abstract class UI_Base : MonoBehaviour
             {
                 objects[i] = Util.FindChild<T>(gameObject, name[i], true);
             }
-
-            if(objects[i] == null)
+            if (objects[i] == null)
             {
                 Debug.Log($"Failed to Bind({name[i]})");
             }
@@ -36,14 +34,13 @@ public abstract class UI_Base : MonoBehaviour
 
     protected T Get<T>(int idx) where T : UnityEngine.Object
     {
-        // 아무튼 out 을 위한 배열 변수
+        //Debug.Log($"Get {typeof(T)}");
         UnityEngine.Object[] objects = null;
         // _objects.TryGetValue(typeof(T), out sdf); 배열 변수에 out 하고
         if (_objects.TryGetValue(typeof(T), out objects) == false)
         {
             return null;
         }
-        // 그 배열에 idx 값 넣어서 리턴한다.
         return objects[idx] as T;
     }
 
@@ -54,6 +51,7 @@ public abstract class UI_Base : MonoBehaviour
 
     public  static void BindEvent(GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
     {
+        //Debug.Log($"{go.name}");
         UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
 
         switch (type)

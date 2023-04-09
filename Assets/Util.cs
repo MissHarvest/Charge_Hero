@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Util// : MonoBehaviour
 {
-    public static T GetOrAddComponent<T>(GameObject go) where T : Component
+    public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
     {
         T component = go.GetComponent<T>();
 
-        if(component == null)
+        if (component == null)
+        {
             component = go.AddComponent<T>();
+        }
 
         return component;
     }
@@ -19,7 +21,7 @@ public class Util// : MonoBehaviour
         if (go == null)
             return null;
 
-        if(rescursive == false) // 본인의 직계만 확인 ? 
+        if(rescursive == false) // 본인의 직계만 확인 ! 
         {
             for(int i = 0; i < go.transform.childCount; i++)
             {

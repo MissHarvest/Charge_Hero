@@ -22,10 +22,13 @@ public class UI_GameplayPanel : UI_Popup
         Bind<Text>(typeof(Texts));
 
         // Text text = Get<Text>((int)Texts.PlayerAtk_Text);
-        GetObject((int)Texts.PlayerAtk_Text).EventBind(Test, Define.UIEvent.Click);
+        //GameObject temp = GetObject((int)Texts.PlayerAtk_Text);
+        //Debug.Log($"PlayerAtk_Text Object is {temp.name}");
+        GetText((int)Texts.PlayerAtk_Text).gameObject.EventBind(Test, Define.UIEvent.Click);
+
     }
     private void Test(PointerEventData eventdata)
     {
-
+        Debug.Log("Click Event");
     }
 }

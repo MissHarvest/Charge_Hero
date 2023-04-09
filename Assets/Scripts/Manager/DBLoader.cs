@@ -220,7 +220,7 @@ public class DBLoader : MonoSingleton<DBLoader>
             var tmp = Array.Find(GameManager.instance.stages, x => x.idx == userStageInfo.idx);
             if (tmp == null)
                 continue;
-            Debug.Log($"Set {i}");
+            //Debug.Log($"Set {i}");
             tmp.getStar = userStageInfo.getStar;
             tmp.percent = userStageInfo.percent;
             tmp.isClear = userStageInfo.isClear;

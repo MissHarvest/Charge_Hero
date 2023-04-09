@@ -11,6 +11,7 @@ public class GameScene : BaseScene
         SceneType = Define.Scene.Game;
 
         // To do //
+        Managers.UI.ShowPopupUI<UI_GameplayPanel>();
     }
 
     public override void Clear()
