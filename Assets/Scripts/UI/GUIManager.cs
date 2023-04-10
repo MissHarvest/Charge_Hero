@@ -183,13 +183,13 @@ public class GUIManager : MonoSingleton<MonoBehaviour>
     }
     public void SetUI()
     {
-        ui_Dist.Set();
-        bossHP_UI.Set();
+        // ui_Dist.Set();
+        // bossHP_UI.Set();
         // To Do
-        HP_UI.Init(GameManager.instance.status.hp);
-        HP_Back_UI.Init(GameManager.instance.status.hp);
+        // HP_UI.Init(GameManager.instance.status.hp);
+        // HP_Back_UI.Init(GameManager.instance.status.hp);
         // Shield UI √ ±‚»≠ //
-        SHIELD_UI.Init(GameManager.instance.status.def_cnt);
+        // SHIELD_UI.Init(GameManager.instance.status.def_cnt);
 
         txt_Atk.text = string.Format("{0:#,###}", GameManager.instance.status.atk);
     }

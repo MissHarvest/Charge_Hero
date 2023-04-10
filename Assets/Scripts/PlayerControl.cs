@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -10,8 +11,8 @@ public class PlayerControl : MonoBehaviour
     [Header("_Button_")]
     JumpButton jumpBtn;
     SlideButton slideBtn;
-    bool isJumpBtnDown;
-    bool isSlideBtnDown;
+    public bool isJumpBtnDown;
+    public bool isSlideBtnDown;
 
     [Header("_Set_")]
     public E_State state;               // 플레이어 상태
@@ -62,18 +63,23 @@ public class PlayerControl : MonoBehaviour
     void Awake()
     {
         //GameManager.SM
-        jumpBtn = GUIManager.instance.jumpBtn.GetComponent<JumpButton>();
-        jumpBtn.SetCb((flag) => isJumpBtnDown = flag);
-        slideBtn = GUIManager.instance.slideBtn.GetComponent<SlideButton>();
-        slideBtn.SetCb((flag) => isSlideBtnDown = flag);
+        //jumpBtn = GUIManager.instance.jumpBtn.GetComponent<JumpButton>();
+        //jumpBtn.SetCb((flag) => isJumpBtnDown = flag);
+        //slideBtn = GUIManager.instance.slideBtn.GetComponent<SlideButton>();
+        //slideBtn.SetCb((flag) => isSlideBtnDown = flag);
 
         f_Accel = 1 / f_StartToFinishTime;
-        StageManager.instance.go_Player = this.gameObject;
+        // StageManager.instance.go_Player = this.gameObject;
+    }
+    public void LinkControler(UI_GameplayPanel t)
+    {
+        // t.SetAction((flag) => isJumpBtnDown = flag);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Player Start");
         v_moveDir = Vector3.up;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -82,8 +88,9 @@ public class PlayerControl : MonoBehaviour
         colliders[0].enabled = true;
         colliders[1].enabled = false;
         //cam 을 GM 으로 부터 할당받기.
-        go_Target = StageManager.instance.go_Boss;
-        landPosition = go_Target.GetComponent<BossMonster>().goal.transform.position;
+        // go_Target = StageManager.instance.go_Boss;
+         
+        // landPosition = go_Target.GetComponent<BossMonster>().goal.transform.position;
     }
 
     // Update is called once per frame
@@ -96,7 +103,7 @@ public class PlayerControl : MonoBehaviour
     public void InputControl()
     {
         //if(state != E_State.Aviation)
-        if (Input.GetKeyDown(KeyCode.Space)) DoJump();// Jump_Input();
+            // if (Input.GetKeyDown(KeyCode.Space)) DoJump();// Jump_Input();
         //isSlideBtnDown = Input.GetKey(KeyCode.D);
         //Debug.Log("Slide Key" + Input.GetKey(KeyCode.D));
         if(Input.GetKeyDown(KeyCode.D)) isSlideBtnDown = true;
@@ -246,7 +253,7 @@ public class PlayerControl : MonoBehaviour
                 break;
         }
     }
-    public void DoJump()
+    public void DoJump(PointerEventData data)
     {
         if (jumpCnt < 2 && ((int)state <= (int)E_State.JumpDown))
         {
@@ -282,12 +289,12 @@ public class PlayerControl : MonoBehaviour
 
         if (!b_Find)
         {
-            float dist = go_Target.transform.position.x - transform.position.x;
-            if(dist <= m_fDetect_Dist)
-            {
-                b_Find = true;
-                ChangeState(E_State.RunUp);
-            }
+            //float dist = go_Target.transform.position.x - transform.position.x;
+            //if(dist <= m_fDetect_Dist)
+            //{
+            //    b_Find = true;
+            //    ChangeState(E_State.RunUp);
+            //}
         }
     }
     private void OnDrawGizmos()

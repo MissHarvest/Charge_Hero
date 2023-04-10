@@ -40,7 +40,7 @@ public class UI_Chapter : UI_Base
 
         GetText((int)Texts.Chapter_Text).text = $"<b><color=white>{_name}</color></b>";
         
-        if(_chapter != null) GetObject((int)GameObjects.Blocker).SetActive(!_chapter.isOpen);
+        GetObject((int)GameObjects.Blocker).SetActive(!_chapter.isOpen);
 
         GetButton((int)Buttons.Chapter_Btn).gameObject.EventBind(ShowStageScene);
 

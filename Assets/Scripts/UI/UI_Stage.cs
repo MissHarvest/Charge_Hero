@@ -39,17 +39,15 @@ public class UI_Stage : UI_Base
         Bind<GameObject>(typeof(GameObjects));
         Bind<Button>(typeof(Buttons));
 
-        if (_stage != null)
-        {
-            GetText((int)Texts.Stage_Text).text = $"<b><color=white>{_stage.name}</color></b>";
-            GetObject((int)GameObjects.Blocker).SetActive(!_stage.isOpen);
-            GetObject((int)GameObjects.Stars).GetComponent<UI_Star>().ShowStar(_stage.getStar);
-            GetText((int)Texts.Process_Text).text = string.Format("{0:F0} %", _stage.percent);
-        }
+        GetText((int)Texts.Stage_Text).text = $"<b><color=white>{_stage.name}</color></b>";
+        GetObject((int)GameObjects.Blocker).SetActive(!_stage.isOpen);
+        GetObject((int)GameObjects.Stars).GetComponent<UI_Star>().ShowStar(_stage.getStar);
+        GetText((int)Texts.Process_Text).text = string.Format("{0:F0} %", _stage.percent);
         GetButton((int)Buttons.Stage_Btn).gameObject.EventBind(ShowReadyScene);
     }
     void ShowReadyScene(PointerEventData data)
     {
+        Managers.stage = this._stage;
         Managers.UI.ShowSceneUI<UI_ReadyScene>();
     }
 }

@@ -51,7 +51,7 @@ public abstract class UI_Base : MonoBehaviour
 
     public  static void BindEvent(GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
     {
-        //Debug.Log($"{go.name}");
+        // Debug.Log("UI_Base _ Bind");
         UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
 
         switch (type)
@@ -65,7 +65,19 @@ public abstract class UI_Base : MonoBehaviour
                 evt.OnDragHandler += action;
                 break;
         }
+    }
+    public static void BindEvent(GameObject go, Action<bool> action, Define.UIEvent type = Define.UIEvent.Press)
+    {
+        //Debug.Log($"{go.name}");
+        UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
 
+        switch (type)
+        {
+            case Define.UIEvent.Press:
+                evt.OnPointerHandler -= action;
+                evt.OnPointerHandler += action;
+                break;
+        }
     }
 
 }

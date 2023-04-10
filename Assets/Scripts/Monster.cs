@@ -22,7 +22,7 @@ public class Monster : MonoBehaviour
     public float range;
 
     public float speed;
-    public float Damage;
+    public int Damage;
 
     // Start is called before the first frame update
     void Start()

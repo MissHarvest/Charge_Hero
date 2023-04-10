@@ -10,6 +10,7 @@ public class Define
     {
         Click,
         Drag,
+        Press,
     }
     public enum E_Status
     {

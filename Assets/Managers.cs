@@ -11,12 +11,13 @@ public class Managers : MonoBehaviour
     InputManager _input = new InputManager();
     ResourceManager _resource = new ResourceManager();
     UIManager _ui = new UIManager();
+    Stage _stage = null;
 
     public static SoundManager Sound { get { return Instance._sound; } }
     public static InputManager Input { get { return Instance._input; } }
     public static ResourceManager Resource { get { return Instance._resource;} }
     public static UIManager UI { get { return Instance._ui; } }
-
+    public static Stage stage { get { return Instance._stage; } set { Instance._stage = value; } }
     private void Start()
     {
         Init();

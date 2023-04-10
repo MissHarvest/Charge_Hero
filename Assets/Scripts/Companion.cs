@@ -35,16 +35,16 @@ public class Companion : MonoBehaviour
 
     public void GetCompanion()
     {
-        float dist = Vector2.Distance(player.transform.position, transform.position);
-        //Debug.Log(dist);
-        if(dist < 2.2f)
-        {
-            int atk = player.GetComponent<PlayerStatus>().ATK;
-            StartCoroutine(GUIManager.instance.NumberAnimation(atk + 50, atk, E_VALUE.ATK));
-            player.GetComponent<PlayerStatus>().ATK += 50;
-            //PlusStatus.instance.atk += 5;
-            StageManager.instance.rescue += 1;
-            Destroy(this.gameObject);
-        }
+        // float dist = Vector2.Distance(player.transform.position, transform.position);
+        ////Debug.Log(dist);
+        //if(dist < 2.2f)
+        //{
+        //    int atk = player.GetComponent<PlayerStatus>().ATK;
+        //    StartCoroutine(GUIManager.instance.NumberAnimation(atk + 50, atk, E_VALUE.ATK));
+        //    player.GetComponent<PlayerStatus>().ATK += 50;
+        //    // PlusStatus.instance.atk += 5;
+        //    // StageManager.instance.rescue += 1;
+        //    Destroy(this.gameObject);
+        //}
     }
 }

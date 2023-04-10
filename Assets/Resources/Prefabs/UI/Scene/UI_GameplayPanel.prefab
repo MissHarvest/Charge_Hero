@@ -637,8 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9df2f6af0545a4085a99c17f72dea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go_Prefab: {fileID: 3577090265557225514, guid: c750133a6cbffd3478ec582ccd7df13b, type: 3}
-  go_list: []
+  status: {fileID: 0}
 --- !u!114 &3070862290494774893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -990,7 +989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3070862291226590562
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1023,8 +1022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9df2f6af0545a4085a99c17f72dea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go_Prefab: {fileID: 3577090265557225514, guid: 51ce6704f95cae64d957c49759505efb, type: 3}
-  go_list: []
+  status: {fileID: 0}
 --- !u!114 &3070862291226590557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1222,8 +1220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9df2f6af0545a4085a99c17f72dea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go_Prefab: {fileID: 3577090265557225514, guid: 4c6b81bd9ba92a74ba57a8d97ab99624, type: 3}
-  go_list: []
+  status: {fileID: 0}
 --- !u!114 &3070862291300669943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1444,6 +1441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c879b2fba37d9214e9e9c6a603174cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!223 &3070862291525975182
 Canvas:
   m_ObjectHideFlags: 0
@@ -1518,7 +1516,7 @@ GameObject:
   - component: {fileID: 3070862291640063000}
   - component: {fileID: 3070862291640063001}
   m_Layer: 5
-  m_Name: UI_Dist
+  m_Name: Dist_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1597,14 +1595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0979ab8f2dbf34d44b1225a8cdb2747f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go_Player: {fileID: 0}
-  go_Boss: {fileID: 0}
-  go_playerImg: {fileID: 3070862289878520252}
-  go_bossImg: {fileID: 3070862289981195517}
-  multy: 0
-  max_Dist: 0
-  move_Dist: 0
-  go_Dist: {fileID: 3070862291230703381}
 --- !u!1 &3070862291890385318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,6 +1755,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 3070862291525975176}
     m_Modifications:
     - target: {fileID: 7116508779198679632, guid: 1814c2cca2240b44e973ae95861b7d37, type: 3}
+      propertyPath: m_Name
+      value: Boss_UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7116508779198679632, guid: 1814c2cca2240b44e973ae95861b7d37, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -1790,7 +1784,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 8b065a72e2060cc44a13c83905477cff, type: 3}
     - target: {fileID: 7116508779542855621, guid: 1814c2cca2240b44e973ae95861b7d37, type: 3}
       propertyPath: m_Name
-      value: BossHp_Text
+      value: HP_Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 7116508780415309511, guid: 1814c2cca2240b44e973ae95861b7d37, type: 3}
+      propertyPath: m_Name
+      value: BossHP_UI
       objectReference: {fileID: 0}
     - target: {fileID: 7116508780415309528, guid: 1814c2cca2240b44e973ae95861b7d37, type: 3}
       propertyPath: m_Pivot.x

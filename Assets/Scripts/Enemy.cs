@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float Damage;
+    public int Damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerStatus>().Damaged(Damage);
-            StageManager.instance.attacked_Cnt++;
+            // StageManager.instance.attacked_Cnt++;
         }
     }
 

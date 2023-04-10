@@ -3,77 +3,74 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_Distance : MonoBehaviour
+public class UI_Distance : UI_Base
 {
-    public GameObject go_Player;
-    public GameObject go_Boss;
-    public GameObject go_playerImg;
-    public GameObject go_bossImg;
-    public float multy;//배율
-    //public float dist;
-    public float max_Dist;
-    public float move_Dist;
-    RectTransform rectTr;
-    public GameObject go_Dist; //rectTransform 변경
-    
+    enum Images
+    {
+        Player_Img,
+        Boss_Img,
+        Dist_Img,
+    }
+
+    GameObject player;
+    GameObject boss;
+    RectTransform playerUIRect;
+    RectTransform distUIRect;
+
+    float multy;
+    float max_Dist;
+    float move_Dist;
+
     public float percent { get { return move_Dist / max_Dist; } }
+
+    protected override void Init()
+    {
+        Bind<Image>(typeof(Images));
+
+        playerUIRect = GetImage((int)Images.Player_Img).GetComponent<RectTransform>();
+        distUIRect = GetImage((int)Images.Dist_Img).GetComponent<RectTransform>();
+        Reset(this.boss); //m_AnchoredPosition.x
+    }
+
     // bool ready;
     // Start is called before the first frame update
     void Start()
     {
-        //Debug.Log("UI_Dist Start");
-        //go_Player = GameManager.instance.go_Player;
-        //go_Boss = GameManager.instance.go_Boss;
-        
-        //rectTr = go_playerImg.GetComponent<RectTransform>();
-        //Vector3 v_Player = go_Player.transform.position;
-        //Vector3 v_Boss = go_Boss.transform.position;
-
-        //Vector3 v_dist = v_Player - v_Boss;
-        //max_Dist = v_dist.magnitude;
-
-        //multy = 2000 / max_Dist;
+        Init();
     }
-    public void Set()
+    public void Set(GameObject player, GameObject boss)
+    {
+        this.player = player;
+        this.boss = boss;
+    }
+    private void Reset(GameObject boss)
     {
         move_Dist = 0;
-        go_Player = StageManager.instance.go_Player;
-        go_Boss = StageManager.instance.go_Boss;
-        go_bossImg.GetComponent<Image>().sprite = Resources.Load<Sprite>("Image/Boss/" + go_Boss.name);
-        rectTr = go_playerImg.GetComponent<RectTransform>();
-        float v_Player = go_Player.transform.position.x;
-        float v_Boss = go_Boss.transform.position.x;
+        this.boss = boss;
+        playerUIRect.anchoredPosition = new Vector2(0, playerUIRect.anchoredPosition.y);
+        distUIRect.sizeDelta = new Vector2(0, distUIRect.sizeDelta.y);
 
-        float v_dist = v_Boss - v_Player;
-        max_Dist = v_dist;
-
+        GetImage((int)Images.Boss_Img).sprite = Managers.Resource.Load<Sprite>($"Images/Boss/{boss.name}");
+        max_Dist = boss.transform.position.x - player.transform.position.x;
         multy = 2000 / max_Dist;
-        //ready = true;
     }
     // Update is called once per frame
     void Update()
     {
-        if (this.gameObject.activeSelf)
+        float dist = boss.transform.position.x - player.transform.position.x;
+        move_Dist = max_Dist - dist;
+
+        distUIRect.sizeDelta = new Vector2(move_Dist * multy + 50, distUIRect.sizeDelta.y);
+        if (distUIRect.sizeDelta.x >= 2000)
         {
-            float v_Player = go_Player.transform.position.x;
-            float v_Boss = go_Boss.transform.position.x;
+            distUIRect.sizeDelta = new Vector2(2000, distUIRect.sizeDelta.y);
+        }
 
-            float dist = v_Boss- v_Player;// v_dist.magnitude;
-            move_Dist = max_Dist - dist;  // s 플레이어 이동 거리
-
-            rectTr = go_playerImg.GetComponent<RectTransform>();//.localPosition += Vector3.right;// * Time.deltaTime;
-            float x = move_Dist * multy;
-            float rat = x / 2000;
-            RectTransform temp = go_Dist.GetComponent<RectTransform>();
-            temp.sizeDelta = new Vector2(x + 50, temp.sizeDelta.y);
-            if (temp.sizeDelta.x >= 2000) temp.sizeDelta = new Vector2(2000, temp.sizeDelta.y);
-            rectTr.anchoredPosition = new Vector2(x, rectTr.anchoredPosition.y);
-            if (rectTr.anchoredPosition.x >= 1800)
-            {
-                rectTr.anchoredPosition = new Vector2(1800, rectTr.anchoredPosition.y);
-                return;
-            }
-            //Debug.Log("UI_DIST_UPDATE" + rt.anchoredPosition.x);
+        playerUIRect.anchoredPosition = new Vector2(move_Dist * multy, playerUIRect.anchoredPosition.y);
+        if (playerUIRect.anchoredPosition.x >= 1800)
+        {
+            playerUIRect.anchoredPosition = new Vector2(1800, playerUIRect.anchoredPosition.y);
+            return;
         }
     }
 }

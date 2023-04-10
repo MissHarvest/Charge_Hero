@@ -667,6 +667,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chapters: []
   _stages: []
+  _atkEnhacne: []
+  _hpEnhacne: []
+  _shieldEnhacne: []
   _userInfo:
     lvHP: 0
     lvATK: 0
@@ -1603,8 +1606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9df2f6af0545a4085a99c17f72dea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go_Prefab: {fileID: 3577090265557225514, guid: 4c6b81bd9ba92a74ba57a8d97ab99624, type: 3}
-  go_list: []
+  status: {fileID: 0}
 --- !u!1001 &417767150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3795,8 +3797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9df2f6af0545a4085a99c17f72dea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go_Prefab: {fileID: 3577090265557225514, guid: 51ce6704f95cae64d957c49759505efb, type: 3}
-  go_list: []
+  status: {fileID: 0}
 --- !u!1 &606155861
 GameObject:
   m_ObjectHideFlags: 0
@@ -6496,7 +6497,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064356305}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 665010757d8388c4884d97373e7a0ded, type: 3}
   m_Name: 
@@ -6506,12 +6507,9 @@ MonoBehaviour:
   go_Player: {fileID: 0}
   go_Boss: {fileID: 0}
   status:
-    Lv_HP: 0
-    Lv_ATK: 0
-    Lv_DEF: 0
     hp: 3
     atk: 100
-    def_cnt: 0
+    shield: 0
   n_Gold: 0
   changeCoin: 0
   readOnly: 0
@@ -7222,14 +7220,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0979ab8f2dbf34d44b1225a8cdb2747f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go_Player: {fileID: 0}
-  go_Boss: {fileID: 0}
-  go_playerImg: {fileID: 1802496315}
-  go_bossImg: {fileID: 531081892}
-  multy: 0
-  max_Dist: 0
-  move_Dist: 0
-  go_Dist: {fileID: 2103495448}
 --- !u!114 &1242408026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10430,8 +10420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9df2f6af0545a4085a99c17f72dea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go_Prefab: {fileID: 3577090265557225514, guid: c750133a6cbffd3478ec582ccd7df13b, type: 3}
-  go_list: []
+  status: {fileID: 0}
 --- !u!1 &1735028807
 GameObject:
   m_ObjectHideFlags: 0
@@ -10973,7 +10962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1781487615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11190,7 +11179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1835304311
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,12 +7,9 @@ using UnityEngine.SceneManagement;
 [Serializable]
 public struct Status
 {
-    public int Lv_HP;
-    public int Lv_ATK;
-    public int Lv_DEF;
     public int hp;
     public int atk;
-    public int def_cnt;
+    public int shield;
 }
 [Serializable]
 public class Enhance : DB
@@ -134,7 +131,7 @@ public class GameManager : MonoBehaviour
             instance = this;
 
             //DBLoader.Instance.LoadTest();
-            player_prefab = Resources.Load<GameObject>("Prefabs/Player");
+            // player_prefab = Resources.Load<GameObject>("Prefabs/Player");
 
             SceneManager.sceneLoaded += LoadScene;
             //SceneManager.LoadScene();
@@ -248,8 +245,8 @@ public class GameManager : MonoBehaviour
                     //SoundManager.instance.PlayBGM("PlayBGM");
                     Managers.Sound.Play("PlayBGM", SoundType.Bgm);
                 }
-                SetPlayer();// 굳이 동적 할당 해야할까? //
-                StageManager.instance.Set();
+                // SetPlayer();// 굳이 동적 할당 해야할까? //
+                // StageManager.instance.Set();
                 break;
         }
     }
@@ -263,11 +260,11 @@ public class GameManager : MonoBehaviour
         go_Player.GetComponent<PlayerControl>().cam = followCam;
 
         // 업그레이드 된 능력치 Prefab에 적용
-        go_Player.GetComponent<PlayerStatus>().InitStatus(status);
+        //go_Player.GetComponent<PlayerStatus>().InitStatus(status);
     }
     public void GameEnd()
     {
-        StageManager.instance.CheckQuest();
+        // StageManager.instance.CheckQuest();
         OpenStage();
         DBLoader.Instance.SaveTest();
     }

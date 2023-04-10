@@ -30,6 +30,8 @@ public class UI_ChapterScene : UI_Scene
         GetButton((int)Buttons.Back).gameObject.EventBind(ShowTitleScene);
 
         GameObject gridPanel = GetObject((int)GameObjets.GridPanel);
+
+        // 사실 쓸모가 없는 코드가 아닐까. --> 오류가 발생해도 처리해주는 코드인가
         foreach (Transform child in gridPanel.transform)
         {
             Managers.Resource.Destroy(child.gameObject);

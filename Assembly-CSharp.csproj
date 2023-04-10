@@ -93,6 +93,7 @@
     <Compile Include="Assets\UI_ChapterScene.cs" />
     <Compile Include="Assets\UI_Scene.cs" />
     <Compile Include="Assets\UI_EventHandler.cs" />
+    <Compile Include="Assets\UI_Gold.cs" />
     <Compile Include="Assets\Scripts\followCamera.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Status.cs" />
     <Compile Include="Assets\HomeScene.cs" />
@@ -121,7 +122,6 @@
     <Compile Include="Assets\Scripts\BuffTimer.cs" />
     <Compile Include="Assets\Scripts\PlayerStatus.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Enhance.cs" />
-    <Compile Include="Assets\UI_Gold.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\JsonDotNet\link.xml" />

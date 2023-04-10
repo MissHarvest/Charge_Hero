@@ -15,7 +15,7 @@ public class BossMonster : MonoBehaviour
     {
         Debug.Log("BossMonster.Awake");
         goal.transform.position = new Vector3(transform.position.x + 5, -2.0f, transform.position.z);
-        StageManager.instance.go_Boss = this.gameObject;
+        //StageManager.instance.go_Boss = this.gameObject;
     }
     void Start()
     {
@@ -33,20 +33,20 @@ public class BossMonster : MonoBehaviour
         if(collision.gameObject.tag =="Player")
         {
             go_Player = collision.gameObject;
-            //go_Player.GetComponent<PlayerControl>().
+            // go_Player.GetComponent<PlayerControl>().
             if (HP > go_Player.GetComponent<PlayerStatus>().ATK)
             {
-                //SoundManager.instance.PlayEffect("Attacked");
+                // SoundManager.instance.PlayEffect("Attacked");
                 Managers.Sound.Play("Attacked");
                 // 보스의 공격하는 Animation 추가 //
                 go_Player.GetComponent<PlayerControl>().ChangeState(PlayerControl.E_State.Attacked);
-                StageManager.instance.kill = false;
+                // StageManager.instance.kill = false;
             }
             else
             {
-                //SoundManager.instance.PlayEffect("Attack");
+                // SoundManager.instance.PlayEffect("Attack");
                 Managers.Sound.Play("Attack");
-                StageManager.instance.kill = true;
+                // StageManager.instance.kill = true;
                 // 보스의 공격 당하는 Animation 추가 //
                 anim.SetTrigger("doDie");
                 sr.color = Color.gray;
@@ -54,14 +54,5 @@ public class BossMonster : MonoBehaviour
             HP -= go_Player.GetComponent<PlayerStatus>().ATK;
             StartCoroutine(GUIManager.instance.bossHP_UI.HPUI((float)HP));
         }
-    }
-    void Kill_ThePlayer()
-    {
-        Debug.Log("Kill_ThePlayer");
-    }
-    void Die()
-    {
-        Debug.Log("Die");
-        //Time.timeScale = 1;
     }
 }

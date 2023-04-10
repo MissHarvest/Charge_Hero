@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,6 +41,12 @@ public class Item : MonoBehaviour
         v_Dir.Normalize();
         transform.position += v_Dir * speed * Time.deltaTime;
     }
+    Action action;
+    public void GetItemAction(Action _action)
+    {
+        action -= _action;
+        action += _action;
+    }
     void UseItem()
     {
         switch (curType)
@@ -48,13 +55,13 @@ public class Item : MonoBehaviour
                 if (go_Collider.GetComponent<PlayerStatus>().HP < GameManager.instance.status.hp)
                 {
                     go_Collider.GetComponent<PlayerStatus>().HP += value;
-                    GUIManager.instance.HP_UI.Add();
                 }
                 break;
 
             case ItemType.Damage:// 파워업
                 int atk = go_Collider.GetComponent<PlayerStatus>().ATK;
-                StartCoroutine(GUIManager.instance.NumberAnimation(atk + value, atk, E_VALUE.ATK));
+                // Animation 은 나중에 //
+                // StartCoroutine(GUIManager.instance.NumberAnimation(atk + value, atk, E_VALUE.ATK));
                 go_Collider.GetComponent<PlayerStatus>().ATK += value;
                 break;
 

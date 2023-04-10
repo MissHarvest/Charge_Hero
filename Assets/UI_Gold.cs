@@ -12,27 +12,22 @@ public class UI_Gold : UI_Base
     }
     protected override void Init()
     {
-        // Debug.Log("UI_Gold Init");
         Bind<Text>(typeof(Texts));
 
         GetText((int)Texts.Gold_Text).text = string.Format("{0:#,##0} G", DataBase.Get<UserInfo>().gold);
 
-        // Debug.Log();
         for(int i = 0; i < enhanceUIs.Count; i++)
         {
             enhanceUIs[i].SetAction(Consume);
         }
-    }
-    public void InitE()
-    {
-        Init();// 보호 수준 지랄할줄 알았는데
     }
     public int consume;
     public List<UI_Enhance> enhanceUIs = new List<UI_Enhance>();
     // Start is called before the first frame update
     void Start()
     {
-
+        Debug.Log("Gold UI Start");
+        Init();
     }
     public void Consume(int val)
     {

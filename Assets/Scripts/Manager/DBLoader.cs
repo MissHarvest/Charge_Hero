@@ -140,12 +140,12 @@ public class DBLoader : MonoSingleton<DBLoader>
         #endregion
 
         #region Status
-        userInfo.Lv_HP = userStatus.Lv_HP;
-        userInfo.Lv_ATK = userStatus.Lv_ATK;
-        userInfo.Lv_DEF = userStatus.Lv_DEF;
-        userInfo.hp = userStatus.hp;
-        userInfo.atk = userStatus.atk;
-        userInfo.def_cnt = userStatus.def_cnt;
+        //userInfo.Lv_HP = userStatus.Lv_HP;
+        //userInfo.Lv_ATK = userStatus.Lv_ATK;
+        //userInfo.Lv_DEF = userStatus.Lv_DEF;
+        //userInfo.hp = userStatus.hp;
+        //userInfo.atk = userStatus.atk;
+        //userInfo.def_cnt = userStatus.def_cnt;
         #endregion
 
         #region Stage
@@ -203,15 +203,15 @@ public class DBLoader : MonoSingleton<DBLoader>
 
     public void SetUserData(SaveInfo userSaveData)
     {
-        GameManager.instance.status.Lv_HP = userSaveData.Lv_HP;
-        GameManager.instance.status.Lv_ATK = userSaveData.Lv_ATK;
-        GameManager.instance.status.Lv_DEF = userSaveData.Lv_DEF;
-        GameManager.instance.status.hp = userSaveData.hp;
-        GameManager.instance.status.atk = userSaveData.atk;
-        GameManager.instance.status.def_cnt = userSaveData.def_cnt;
-        GameManager.instance.n_Gold = userSaveData.n_Gold;
-        GameManager.instance.ply_Chapter = userSaveData.ply_Chapter;
-        GameManager.instance.ply_Stage = userSaveData.ply_Stage;
+        //GameManager.instance.status.Lv_HP = userSaveData.Lv_HP;
+        //GameManager.instance.status.Lv_ATK = userSaveData.Lv_ATK;
+        //GameManager.instance.status.Lv_DEF = userSaveData.Lv_DEF;
+        //GameManager.instance.status.hp = userSaveData.hp;
+        //GameManager.instance.status.atk = userSaveData.atk;
+        //GameManager.instance.status.def_cnt = userSaveData.def_cnt;
+        //GameManager.instance.n_Gold = userSaveData.n_Gold;
+        //GameManager.instance.ply_Chapter = userSaveData.ply_Chapter;
+        //GameManager.instance.ply_Stage = userSaveData.ply_Stage;
 
         //userInfo.userStageInfoList = GameManager.instance.stages.Select
         for (int i = 0; i < userSaveData.userStageInfoList.Count; i++)

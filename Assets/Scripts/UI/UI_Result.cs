@@ -13,7 +13,7 @@ public class UI_Result : MonoBehaviour
         Quest_Title.text = "";
         for (int i = 0; i < 3; i++)
         {
-            Quest_Title.text += string.Format($"{i + 1}_ {StageManager.instance.quests[i].title}\n");
+            // Quest_Title.text += string.Format($"{i + 1}_ {StageManager.instance.quests[i].title}\n");
         }
         ui_Stars.ShowStar(stars);
         txt_Gold.text = string.Format("x {0:#,##0}", gold);

@@ -77,6 +77,7 @@ public class UI_Enhance : UI_Base
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Enhance UI Start");
         Init();
     }
 
