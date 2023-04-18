@@ -33,7 +33,7 @@ public class UI_ReadyScene : UI_Scene
 
         GetButton((int)Buttons.Back).gameObject.EventBind(ShowStageScene);
         GetButton((int)Buttons.Start_Btn).gameObject.EventBind(LoadGame);
-
+        Managers.UI.ShowPopupUI<UI_BackGround>();
         UI_Gold _gold = Managers.UI.MakeSubUI<UI_Gold>(this.gameObject.transform);
         _gold.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(450, -140);
 
@@ -61,10 +61,11 @@ public class UI_ReadyScene : UI_Scene
     void ShowStageScene(PointerEventData data)
     {
         Managers.UI.ShowSceneUI<UI_StageScene>();
+        Managers.UI.ClosePopupUI();
     }
     void LoadGame(PointerEventData data)
     {
-        SceneManager.LoadScene("1-1");
+        SceneManager.LoadScene(Managers.stage.name);
         Managers.Resource.Destroy(this.gameObject);
     }
 

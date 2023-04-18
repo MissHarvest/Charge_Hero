@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1933796543550429397}
   - component: {fileID: 2680403372383448069}
   - component: {fileID: 5848195481006087438}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ChangeCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

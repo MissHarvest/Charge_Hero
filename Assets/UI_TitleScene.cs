@@ -22,23 +22,17 @@ public class UI_TitleScene : UI_Scene
         base.Init();
 
         Bind<Button>(typeof(Buttons));
-
         GetButton((int)Buttons.Start_Btn).gameObject.EventBind(ShowChapterScene);
         GetButton((int)Buttons.Setting_Btn).gameObject.EventBind(ShowSettingPopup);
+        Managers.UI.ShowPopupUI<UI_BackGround>();
     }
     void ShowChapterScene(PointerEventData data)
     {
         Managers.UI.ShowSceneUI<UI_ChapterScene>();
+        Managers.UI.ClosePopupUI();
     }
     void ShowSettingPopup(PointerEventData data)
     {
-        Managers.UI.ShowPopupUI<UI_SettingPopup>();
+        Managers.UI.ShowPopupUI<UI_SettingPopup>().Set(Define.Scene.Home);
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
 }

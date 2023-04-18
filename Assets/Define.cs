@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Define
 {
-    public enum Scene { Unknown, Home, Game }
+    public enum Scene { Home, Game, Unknown }
 
     public enum UIEvent
     {
@@ -17,5 +17,11 @@ public class Define
         HP,
         ATK,
         SHIELD,
+    }
+    public enum Effects
+    {
+        None,
+        Avitation,
+        Invincibility,
     }
 }

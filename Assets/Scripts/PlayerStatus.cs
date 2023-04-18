@@ -6,21 +6,18 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    Status status;
-    public int HP { get { return status.hp; } set { status.hp = value; ChangeStatHandler.Invoke(); } }
-    public int ATK { get { return status.atk; } set { status.atk = value; } }
-    public int SHIELD { get { return status.shield; } set { status.shield = value; } } // 무적 Item 지속시간 증가
-    
-    PlayerControl control;
-    PlayerEffect effect;
+    // 멤버 변수 //
+    PlayerControl   control;
+    PlayerEffect    effect;
+    [SerializeField] Status          status;
+    Action          hpUIUpdate; // int 아니어도됨..
+    Action<int>     atkUIUpdate;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Init //
-        control = GetComponent<PlayerControl>();
-        effect = GetComponent<PlayerEffect>();
-    }
+
+    // 프로퍼티 //
+    public int HP { get { return status.hp; } }
+    public int ATK { get { return status.atk; } }
+    public int SHIELD { get { return status.shield; } } // 무적 Item 지속시간 증가
 
     public void Set(UserInfo userinfo)
     {
@@ -28,26 +25,31 @@ public class PlayerStatus : MonoBehaviour
         status.atk = userinfo.atk;
         status.shield = userinfo.shield;
     }
-    Action ChangeStatHandler;
-
-    // player.GetComponent(PlayerStatus).AddAction(action)
-    public void ChangeStatus(Action action)
+    void Start()
     {
-        this.ChangeStatHandler -= action;
-        this.ChangeStatHandler += action;
+        // Init //
+        control = GetComponent<PlayerControl>();
+        effect = GetComponent<PlayerEffect>();
+    }
+    public void HpChanged(Action _action)
+    {
+        hpUIUpdate -= _action;
+        hpUIUpdate += _action;
+    }
+    public void AtkChanged(Action<int> action)
+    {
+        this.atkUIUpdate -= action;
+        this.atkUIUpdate += action;
     }
     public void Damaged(int dmg)
     {
-        // StageManager.instance.attacked_Cnt++;
         if (SHIELD > 0)
         {
-            SHIELD -= dmg;
-            //GUIManager.instance.SHIELD_UI.Remove();
+            status.shield -= dmg;
         }
         else
         {
-            HP -= dmg;
-            //GUIManager.instance.HP_UI.Remove();
+            status.hp -= dmg;
         }
 
         if (HP <= 0)
@@ -58,7 +60,22 @@ public class PlayerStatus : MonoBehaviour
             control.ChangeState(PlayerControl.E_State.End);
         }
         else effect.Call_InvincibleMode();
-
-        ChangeStatHandler.Invoke();
+        // Debug.Log(StageManager.Instance.gameObject.name);
+        StageManager.Instance.PlayerAttacked();
+        hpUIUpdate.Invoke();
     }
+    // Recovery
+    public void Recovery()
+    {
+        if (HP < DataBase.Get<UserInfo>().hp)
+            status.hp++;
+        hpUIUpdate.Invoke();
+    }
+    // PowerUP
+    public void PowerUP(int power)
+    {
+        atkUIUpdate.Invoke(power);
+        status.atk += power;
+    }
+
 }

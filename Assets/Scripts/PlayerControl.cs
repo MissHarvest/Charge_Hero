@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +10,6 @@ public class PlayerControl : MonoBehaviour
     public enum E_State { Run, JumpUP, JumpDown, Aviation, RunUp, LastJump, Stay, Attack, End, Attacked};
 
     [Header("_Button_")]
-    JumpButton jumpBtn;
-    SlideButton slideBtn;
     public bool isJumpBtnDown;
     public bool isSlideBtnDown;
 
@@ -51,7 +50,7 @@ public class PlayerControl : MonoBehaviour
     float f_Accel;                      // 공격 지점에 도달하는 속도
 
     [Header("_ETC_")]
-    public followCamera cam;
+    followCamera cam;
     public Vector3 v_BackPos;           // 리스폰 지점 --> 함수로 변경
     
     float f_timer;
@@ -62,18 +61,13 @@ public class PlayerControl : MonoBehaviour
 
     void Awake()
     {
-        //GameManager.SM
-        //jumpBtn = GUIManager.instance.jumpBtn.GetComponent<JumpButton>();
-        //jumpBtn.SetCb((flag) => isJumpBtnDown = flag);
-        //slideBtn = GUIManager.instance.slideBtn.GetComponent<SlideButton>();
-        //slideBtn.SetCb((flag) => isSlideBtnDown = flag);
-
         f_Accel = 1 / f_StartToFinishTime;
-        // StageManager.instance.go_Player = this.gameObject;
     }
-    public void LinkControler(UI_GameplayPanel t)
+    public void Set(GameObject boss, followCamera _cam)
     {
-        // t.SetAction((flag) => isJumpBtnDown = flag);
+        go_Target = boss;
+        this.cam = _cam;
+        landPosition = boss.GetComponent<BossMonster>().goal.transform.position;
     }
 
     // Start is called before the first frame update
@@ -87,10 +81,6 @@ public class PlayerControl : MonoBehaviour
         ChangeState(E_State.Run);
         colliders[0].enabled = true;
         colliders[1].enabled = false;
-        //cam 을 GM 으로 부터 할당받기.
-        // go_Target = StageManager.instance.go_Boss;
-         
-        // landPosition = go_Target.GetComponent<BossMonster>().goal.transform.position;
     }
 
     // Update is called once per frame
@@ -199,7 +189,7 @@ public class PlayerControl : MonoBehaviour
                 break;
 
             case E_State.RunUp:
-                GUIManager.instance.bossHP_UI.gameObject.SetActive(true);
+                // GUIManager.instance.bossHP_UI.gameObject.SetActive(true);
                 rb.gravityScale = GRAVITY;
                 SPEED = f_Speed;
                 anim.SetBool("isLand", false);
@@ -249,17 +239,22 @@ public class PlayerControl : MonoBehaviour
                 SPEED = 0;
                 rb.velocity = Vector2.zero;
                 this.gameObject.layer = 9;
-                GameManager.instance.GameEnd();
+                action.Invoke();
                 break;
         }
     }
+    Action action;
+    public void DieAction(Action action)
+    {
+        this.action -= action;
+        this.action += action;
+    }
+
     public void DoJump(PointerEventData data)
     {
         if (jumpCnt < 2 && ((int)state <= (int)E_State.JumpDown))
         {
-            //SoundManager.instance.PlayEffect("Jump");
             Managers.Sound.Play("Jump");
-            //Debug.Log("State(" + state + ")_Jump" + jumpCnt);
             anim.SetBool("isSlide", false);
             switch(jumpCnt)
             {
@@ -285,16 +280,15 @@ public class PlayerControl : MonoBehaviour
     }
     void DetectBoss()
     {
-        // UI_Distance -> Update()
-
         if (!b_Find)
         {
-            //float dist = go_Target.transform.position.x - transform.position.x;
-            //if(dist <= m_fDetect_Dist)
-            //{
-            //    b_Find = true;
-            //    ChangeState(E_State.RunUp);
-            //}
+            float dist = go_Target.transform.position.x - transform.position.x;
+            if (dist <= m_fDetect_Dist)
+            {
+                b_Find = true;
+                go_Target.GetComponent<BossMonster>().HpUIEnable();
+                ChangeState(E_State.RunUp);
+            }
         }
     }
     private void OnDrawGizmos()
@@ -343,33 +337,13 @@ public class PlayerControl : MonoBehaviour
             Debug.Log("Player back");
             transform.position = v_BackPos;
             ChangeState(E_State.Stay);
-            GameManager.instance.followCam.ChangeCamType(followCamera.E_type.set);
+            cam.ChangeCamType(followCamera.E_type.set);
         }
-        //StartCoroutine(ReRun());
+        StartCoroutine(ReRun());
     }
     public IEnumerator ReRun() // 다시 달리기
     {
         yield return new WaitForSeconds(1f);
         ChangeState(E_State.Run);
-    }
-    IEnumerator AnimSlash()
-    {
-        yield return new WaitForSeconds(0.8f);
-        anim.SetTrigger("Slash");
-    }
-    IEnumerator AnimFinish()
-    {
-        //cam.ChangeCamType(followCamera.E_type.final);
-        yield return new WaitForSeconds(1.6f);
-        anim.SetTrigger("IDle");
-        yield return new WaitForSeconds(1f);
-        //fin.SetActive(true);
-    }
-    IEnumerator AnimFinish2()
-    {
-        yield return new WaitForSeconds(0.61f);
-        anim.speed = 0;
-        yield return new WaitForSeconds(1f);
-        //fin.SetActive(true);
     }
 }

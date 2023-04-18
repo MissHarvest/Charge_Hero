@@ -257,7 +257,7 @@ public class GameManager : MonoBehaviour
         go_Player = Managers.Resource.Instantiate("Player");
         Debug.Log("Creat Player in " + SceneManager.GetActiveScene().name);
         followCam.go_Player = go_Player;
-        go_Player.GetComponent<PlayerControl>().cam = followCam;
+        /// go_Player.GetComponent<PlayerControl>().cam = followCam;
 
         // 업그레이드 된 능력치 Prefab에 적용
         //go_Player.GetComponent<PlayerStatus>().InitStatus(status);

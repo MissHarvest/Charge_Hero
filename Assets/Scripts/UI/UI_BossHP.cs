@@ -7,7 +7,7 @@ public class UI_BossHP : UI_Base
 {
     enum Images
     {
-        BossHP_UI,
+        HP,
         Boss_UI,
     }
     enum Texts
@@ -25,19 +25,18 @@ public class UI_BossHP : UI_Base
         Bind<Image>(typeof(Images));
         Bind<Text>(typeof(Texts));
 
-        hpUIRect = GetImage((int)Images.BossHP_UI).gameObject.GetComponent<RectTransform>();
+        hpUIRect = GetImage((int)Images.HP).gameObject.GetComponent<RectTransform>();
         maxWidth = hpUIRect.sizeDelta.x;
-
         Reset(this.boss);
     }
     private void Start()
     {
         Init();
+        this.gameObject.SetActive(false);
     }
     public void Set(GameObject boss)
     {
         this.boss = boss;
-        this.gameObject.SetActive(false);
     }
     private void Reset(GameObject boss)
     {
@@ -50,6 +49,13 @@ public class UI_BossHP : UI_Base
         hpUIRect.sizeDelta = new Vector2(maxWidth, hpUIRect.sizeDelta.y);
         GetImage((int)Images.Boss_UI).sprite = Managers.Resource.Load<Sprite>($"Images/Boss/{boss.name}");
         GetText((int)Texts.HP_Text).text = string.Format("{0:F0} / {1:F0}", maxHP, maxHP);
+        bossMonster.UIEnable = _update;
+    }
+    void _update(float target)
+    {
+        this.gameObject.SetActive(true);
+        if (target == 0) target = maxHP;
+        StartCoroutine(HPUI(target));
     }
     public IEnumerator HPUI(float target)
     {

@@ -38,7 +38,7 @@ public class UI_List : UI_Base
     public void Set(GameObject player, Define.E_Status type)
     {
         this.status = player.GetComponent<PlayerStatus>();
-        status.ChangeStatus(_update);
+        status.HpChanged(_update);
 
         this.type = type;
     }

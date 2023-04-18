@@ -176,7 +176,7 @@ public class SoundManager// : MonoBehaviour
     }
     public void OffBGM()
     {
-        BG_AudioSource.Stop();
+        _audioSources[(int)SoundType.Bgm].Stop();
     }    
     public void PlayEffect(string name)
     {

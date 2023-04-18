@@ -6,25 +6,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_SkillScene : MonoBehaviour
+public class UI_SkillPopup : UI_Popup
 {
+    enum Images
+    {
+        Skill_Img,
+    }
+    protected override void Init()
+    {
+        Bind<Image>(typeof(Images));
+    }
     //public GameObject go_Scene;
     public float m_fSpeed;
     public int direction;
     public float m_fTime;
     public float m_fStopTime;
     RectTransform rectTransform;
+    followCamera cam;
     // Start is called before the first frame update
     void Start()
     {
-        rectTransform = GetComponent<RectTransform>();
+        Init();
+        rectTransform = GetImage((int)Images.Skill_Img).gameObject.GetComponent<RectTransform>();
         rectTransform.transform.localPosition = new Vector3(-Screen.width, 0, 0);
     }
-    private void OnEnable()
+    public void Set(followCamera cam)
     {
-        
+        this.cam = cam;
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -46,11 +55,8 @@ public class UI_SkillScene : MonoBehaviour
                 rectTransform.transform.localPosition += Vector3.right * m_fSpeed * Time.deltaTime;
                 if (rectTransform.transform.localPosition.x >= Screen.width)
                 {
-                    GameManager.instance.followCam.ChangeCamType(followCamera.E_type.closedown);
-                    m_fTime = 0;
-                    direction = 0;
-                    this.gameObject.SetActive(false);
-                    rectTransform.transform.localPosition = new Vector3(-Screen.width, 0, 0);
+                    cam.ChangeCamType(followCamera.E_type.closedown);
+                    Managers.UI.ClosePopupUI(this);
                 }
                 break;
         }

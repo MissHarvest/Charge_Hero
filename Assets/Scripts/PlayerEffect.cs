@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,20 +9,19 @@ public class PlayerEffect : MonoBehaviour
     PlayerControl control;
     SpriteRenderer sr;
 
-    public enum E_effect { None, ItemInvin, Avitaton }// 비행이랑 무적 변경
+    //public enum E_effect { None, ItemInvin, Avitaton }// 비행이랑 무적 변경
     public bool[] b_Effected = new bool[2]; // Effect 활성화 여부
     public GameObject[] go_Effects;         // Effect 오브젝트    
-    E_effect curEffect;
+    Define.Effects curEffect;
     public float f_Magnetic_Rad;            // 자석 범위
     public float f_Invic_time;              // 피격 무적 시간
     public Color[] colors;                  // 피격 효과 색상
-    public bool INVICIBILLITY { get { return (b_Effected[0] || b_Effected[1]); } }
     // Start is called before the first frame update
     void Start()
     {
         control = GetComponent<PlayerControl>();
         sr = GetComponent<SpriteRenderer>();
-        curEffect = E_effect.None;
+        curEffect = Define.Effects.None;
     }
 
     // Update is called once per frame
@@ -29,46 +29,38 @@ public class PlayerEffect : MonoBehaviour
     {
         if(b_Effected[1]) Avitation();// 자석 및 날기
     }
-    public void Activate_Effect(E_effect type, float duration = 0)
+    public Action<Define.Effects> buffTimerCount;
+    public void GetEffectItem(Action<Define.Effects> action)
+    {
+        buffTimerCount -= action;
+        buffTimerCount += action;
+    }
+    public void Activate_Effect(Define.Effects type , float duration = 0)
     {
         ChangeEffect(type);
-        //if (curEffect == E_effect.None)
-        //{
-        //    ChangeEffect(type);
-        //}
-        //else if(curEffect == type)
-        //{
-        //    ChangeEffect(curEffect);
-        //}
-        //else if((int)curEffect > (int)type) // 비행 상태 중 무적 획득
-        //{
-        //    ChangeEffect(curEffect);
-        //}
-        //else if((int)curEffect < (int)type) // 무적 중 비행
-        //{
-        //    ChangeEffect(type);
-        //}
     }
     public void Call_InvincibleMode()
     {
         StartCoroutine(SetAttacked());
     }
-    void ChangeEffect(E_effect effect)
+    void ChangeEffect(Define.Effects effect)
     {
         curEffect = effect;
         switch (curEffect)
         {
-            case E_effect.None:
+            case Define.Effects.None:
                 if (control.state == PlayerControl.E_State.Aviation) control.ChangeState(PlayerControl.E_State.Run);
                 this.gameObject.layer = 0;
                 break;
-            case E_effect.Avitaton:
+            case Define.Effects.Avitation:
                 OnAvitation();
-                BuffManager.instance.TurnOnBuffTimer(E_BUFFTYPE.Aviation);
+                buffTimerCount.Invoke(curEffect);
+                //BuffManager.instance.TurnOnBuffTimer(E_BUFFTYPE.Aviation);
                 break;
-            case E_effect.ItemInvin:
+            case Define.Effects.Invincibility:
                 OnInvincibility();
-                BuffManager.instance.TurnOnBuffTimer(E_BUFFTYPE.Invincibility);
+                buffTimerCount.Invoke(curEffect);
+                //BuffManager.instance.TurnOnBuffTimer(E_BUFFTYPE.Invincibility);
                 break;
         }
     }
@@ -86,7 +78,7 @@ public class PlayerEffect : MonoBehaviour
         control.ChangeState(PlayerControl.E_State.Aviation);
         b_Effected[1] = true;
         go_Effects[1].SetActive(true);
-        this.gameObject.layer = 11; // 9 여도 상관 없을듯
+        this.gameObject.layer = 9; // 9 여도 상관 없을듯
     }
     void OnInvincibility()
     {
@@ -103,7 +95,7 @@ public class PlayerEffect : MonoBehaviour
             go_Effects[i].SetActive(false);
         }
         gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        ChangeEffect(E_effect.None);
+        ChangeEffect(Define.Effects.None);
     }
     IEnumerator SetAttacked()
     {
@@ -115,7 +107,7 @@ public class PlayerEffect : MonoBehaviour
             sr.color = colors[i % 2];
             yield return new WaitForSeconds(sec);
         }
-        if (curEffect == E_effect.None) this.gameObject.layer = 0;
+        if (curEffect == Define.Effects.None) this.gameObject.layer = 0;
         //Debug.Log("Invincibility_End");
     }
     void Avitation()
@@ -125,7 +117,7 @@ public class PlayerEffect : MonoBehaviour
         {
             if(collider.GetComponent<Item>())
             {
-                collider.GetComponent<Item>().moved = true;
+                collider.GetComponent<Item>().SetTarget(this.gameObject);
             }
         }
     }

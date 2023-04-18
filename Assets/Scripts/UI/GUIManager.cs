@@ -284,7 +284,7 @@ public class GUIManager : MonoSingleton<MonoBehaviour>
             Managers.Sound.Play("Clear");
         }
         list_Window[idx].SetActive(true);
-        list_Window[idx].GetComponent<UI_Result>().Set(cnt, gold);
+        //list_Window[idx].GetComponent<UI_Result>().Set(cnt, gold);
     }
     public void Event_Quit_Window()
     {

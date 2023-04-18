@@ -293,7 +293,7 @@ Transform:
   - {fileID: 362776430}
   - {fileID: 1375828803}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &231368025
 GameObject:
@@ -1094,7 +1094,7 @@ Transform:
   m_Children:
   - {fileID: 310635868}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &495993497
 GameObject:
@@ -1167,7 +1167,7 @@ Transform:
   m_Children:
   - {fileID: 2032033295}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &584452593
 PrefabInstance:
@@ -1231,69 +1231,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 126227498717610352, guid: bd8557ed1a8b8834ea45498cf51cfab2, type: 3}
   m_PrefabInstance: {fileID: 584452593}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &744086495
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 744086497}
-  - component: {fileID: 744086496}
-  m_Layer: 0
-  m_Name: StageManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &744086496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 744086495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53fa3f341dbb8c147a7be7141d55ccc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  go_Player: {fileID: 0}
-  go_Boss: {fileID: 0}
-  stage:
-    idx: 0
-    name: 
-    getStar: 0
-    percent: 0
-    repeat: 0
-    isOpen: 0
-    isClear: 0
-    first_Gold: 0
-    repeat_Gold: 0
-    bossHP: 0
-    questType: 
-  rescue: 0
-  kill: 0
-  attacked_Cnt: 0
-  quests: []
-  questidx: 
---- !u!4 &744086497
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 744086495}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &803622116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,7 +1260,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &822116131
 PrefabInstance:
@@ -1334,7 +1271,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 678526387668236374, guid: ae94263c095b4984cb356e36339a58e5, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 678526387668236374, guid: ae94263c095b4984cb356e36339a58e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5363,7 +5300,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1260083984
 PrefabInstance:
@@ -5572,7 +5509,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go_Player: {fileID: 0}
-  skill_Scene: {fileID: 0}
   m_fZoom: 1
   m_fZoomOut: 0
   type: 0
@@ -5703,7 +5639,7 @@ Transform:
   - {fileID: 231368026}
   - {fileID: 927125083}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1537847181
 PrefabInstance:
@@ -6196,7 +6132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2060539891
 Transform:
   m_ObjectHideFlags: 0

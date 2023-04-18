@@ -12,8 +12,8 @@ public class UI_Distance : UI_Base
         Dist_Img,
     }
 
-    GameObject player;
-    GameObject boss;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject boss;
     RectTransform playerUIRect;
     RectTransform distUIRect;
 
@@ -40,17 +40,19 @@ public class UI_Distance : UI_Base
     }
     public void Set(GameObject player, GameObject boss)
     {
+        Debug.Log($"(UI_Distance)Recieved {player.name} , {boss.name}");
         this.player = player;
         this.boss = boss;
     }
-    private void Reset(GameObject boss)
+    private void Reset(GameObject _boss)
     {
+        Debug.Log($"(UI_Distance)Call Reset {boss.name}");
         move_Dist = 0;
-        this.boss = boss;
+        if (this.boss != _boss) this.boss = _boss;
         playerUIRect.anchoredPosition = new Vector2(0, playerUIRect.anchoredPosition.y);
         distUIRect.sizeDelta = new Vector2(0, distUIRect.sizeDelta.y);
 
-        GetImage((int)Images.Boss_Img).sprite = Managers.Resource.Load<Sprite>($"Images/Boss/{boss.name}");
+        GetImage((int)Images.Boss_Img).sprite = Managers.Resource.Load<Sprite>($"Images/Boss/{this.boss.name}");
         max_Dist = boss.transform.position.x - player.transform.position.x;
         multy = 2000 / max_Dist;
     }

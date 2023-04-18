@@ -8,7 +8,9 @@ public class followCamera : MonoBehaviour
 {
     public GameObject go_Player;
     //public Vector3 v_offset;
-    public UI_SkillScene skill_Scene;
+    // UI_SkillScene skill_Scene;
+    // Managers.UI.ShowPopup<UI_SkillPopup>()
+
     public float m_fZoom;
     public float m_fZoomOut;
     float zoomFit;
@@ -58,8 +60,10 @@ public class followCamera : MonoBehaviour
                     if (cam.orthographicSize <= 5.0f)
                     {
                         cam.orthographicSize = 5.0f;
-                        //skill_Scene.OnEventSkillScene();
-                        GUIManager.instance.Event_ShowSkill();
+                        // skill_Scene.OnEventSkillScene();
+                        // GUIManager.instance.Event_ShowSkill();
+                        UI_SkillPopup skillpopup = Managers.UI.ShowPopupUI<UI_SkillPopup>();
+                        skillpopup.Set(this);
                         ChangeCamType(E_type.delay);
                     }
                     break;
@@ -110,15 +114,7 @@ public class followCamera : MonoBehaviour
         switch (type)
         {
             case E_type.closeup:
-                //v_Origin = transform.position;
-                //float t = go_Player.transform.position.x;
-                //float s = go_Player.GetComponent<PlayerControl>().max_Height / go_Player.GetComponent<PlayerControl>().deltaY;
-                //t = t + go_Player.GetComponent<PlayerControl>().f_Speed * s * Time.deltaTime;//0.5, // 1.1
-                ////Debug.Log("Tims(s):" + s + "Goal.x:" + t);//-5.5
-                //float height = go_Player.GetComponent<PlayerControl>().max_Height + deltahieght;
-                //v_Goal = new Vector3(-5.5f, height, -5);// 10.0f
-                //v_moveDir = v_Goal - transform.position;
-                //v_moveDir.Normalize();
+                 
                 break;
             case E_type.closedown:
                 go_Player.GetComponent<PlayerControl>().ChangeState(PlayerControl.E_State.Attack);

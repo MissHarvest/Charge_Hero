@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum E_Quest { BOSS, Run, Rescue, Attacked, HP }
 [System.Serializable]
-public struct Quest
+public class Quest : DB
 {
     public int idx;
     public E_Quest type;

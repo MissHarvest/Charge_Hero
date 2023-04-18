@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7850110173001571472}
   - component: {fileID: 8872934420282083607}
   m_Layer: 5
-  m_Name: ItemImage
+  m_Name: Buff_Img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 5968899328570462198}
   - component: {fileID: 8723440105337962210}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: Timer_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 2158947744575884825}
   - component: {fileID: 7674845203263148748}
   m_Layer: 5
-  m_Name: BuffTimer
+  m_Name: UI_Buff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,11 +190,11 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 150, y: 150}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &7674845203263148748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +207,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b5e62a0ece8824b9b7f911720a5e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffTime: 5
-  itemSprite: {fileID: 1052799332845000922}
-  txt_timer: {fileID: 8723440105337962210}

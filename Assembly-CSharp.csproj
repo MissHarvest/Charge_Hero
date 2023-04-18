@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\UI_List.cs" />
-    <Compile Include="Assets\Scripts\UI\UI_SkillScene.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_SkillPopup.cs" />
     <Compile Include="Assets\Scripts\Manager\CustomAttribute\LabelAttribute.cs" />
     <Compile Include="Assets\Scripts\QuestManager.cs" />
     <Compile Include="Assets\Scripts\Obstruction.cs" />
@@ -108,6 +108,7 @@
     <Compile Include="Assets\Scripts\UI\UI_BlockManager.cs" />
     <Compile Include="Assets\UI_Chapter.cs" />
     <Compile Include="Assets\Extension.cs" />
+    <Compile Include="Assets\UI_BackGround.cs" />
     <Compile Include="Assets\Scripts\BuffManager.cs" />
     <Compile Include="Assets\Scripts\BossMonster.cs" />
     <Compile Include="Assets\Scripts\PlayerEffect.cs" />
@@ -119,7 +120,7 @@
     <Compile Include="Assets\UI_TitleScene.cs" />
     <Compile Include="Assets\UIManager.cs" />
     <Compile Include="Assets\Scripts\Gold.cs" />
-    <Compile Include="Assets\Scripts\BuffTimer.cs" />
+    <Compile Include="Assets\Scripts\UI_Buff.cs" />
     <Compile Include="Assets\Scripts\PlayerStatus.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Enhance.cs" />
   </ItemGroup>

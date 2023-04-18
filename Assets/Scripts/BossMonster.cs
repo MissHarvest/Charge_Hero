@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -22,11 +23,10 @@ public class BossMonster : MonoBehaviour
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
     }
-
-    // Update is called once per frame
-    void Update()
+    public Action<float> UIEnable;
+    public void HpUIEnable()
     {
-        
+        UIEnable.Invoke(0);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -40,19 +40,21 @@ public class BossMonster : MonoBehaviour
                 Managers.Sound.Play("Attacked");
                 // 보스의 공격하는 Animation 추가 //
                 go_Player.GetComponent<PlayerControl>().ChangeState(PlayerControl.E_State.Attacked);
-                // StageManager.instance.kill = false;
+                StageManager.Instance.kill = false;
             }
             else
             {
                 // SoundManager.instance.PlayEffect("Attack");
                 Managers.Sound.Play("Attack");
-                // StageManager.instance.kill = true;
+                
                 // 보스의 공격 당하는 Animation 추가 //
                 anim.SetTrigger("doDie");
                 sr.color = Color.gray;
+                StageManager.Instance.kill = true;
             }
             HP -= go_Player.GetComponent<PlayerStatus>().ATK;
-            StartCoroutine(GUIManager.instance.bossHP_UI.HPUI((float)HP));
+            if (HP < 0) HP = 0;
+            UIEnable.Invoke(HP);
         }
     }
 }

@@ -41,8 +41,8 @@ public class UI_Stage : UI_Base
 
         GetText((int)Texts.Stage_Text).text = $"<b><color=white>{_stage.name}</color></b>";
         GetObject((int)GameObjects.Blocker).SetActive(!_stage.isOpen);
-        GetObject((int)GameObjects.Stars).GetComponent<UI_Star>().ShowStar(_stage.getStar);
-        GetText((int)Texts.Process_Text).text = string.Format("{0:F0} %", _stage.percent);
+        GetObject((int)GameObjects.Stars).GetComponent<UI_Star>().Set(_stage.getStar);
+        GetText((int)Texts.Process_Text).text = string.Format("{0:F0} %", _stage.percent * 100);
         GetButton((int)Buttons.Stage_Btn).gameObject.EventBind(ShowReadyScene);
     }
     void ShowReadyScene(PointerEventData data)

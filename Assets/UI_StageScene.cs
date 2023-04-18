@@ -39,7 +39,7 @@ public class UI_StageScene : UI_Scene
         {
             GameObject go = Managers.UI.MakeSubUI<UI_Stage>(gridPanel.transform).gameObject;
             UI_Stage stage = go.GetOrAddComponet<UI_Stage>();
-            stage.SetInfo($"STAGE {i + 1}", DataBase.GetStage(i));
+            stage.SetInfo($"STAGE {i + 1}", DataBase.Get<Stage>(i));
         }
     }
     // Update is called once per frame

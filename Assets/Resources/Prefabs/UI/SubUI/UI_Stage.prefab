@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 8535297048722225250}
   - component: {fileID: 4201300492892712018}
   m_Layer: 5
-  m_Name: star (2)
+  m_Name: Star2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 1607855989674788618}
   - component: {fileID: 8836903863207172982}
   m_Layer: 5
-  m_Name: star
+  m_Name: Star3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -558,10 +558,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2893ac8db8a1b4d8a5055425db43b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stars:
-  - {fileID: 8394010009751895731}
-  - {fileID: 1276265674170604223}
-  - {fileID: 7505922745631186421}
 --- !u!1 &8394010009751895731
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,7 +570,7 @@ GameObject:
   - component: {fileID: 1288383949906958025}
   - component: {fileID: 5675000033529796007}
   m_Layer: 5
-  m_Name: star (1)
+  m_Name: Star1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

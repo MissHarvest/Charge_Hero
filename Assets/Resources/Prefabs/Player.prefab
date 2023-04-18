@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 735141557096687176}
   - component: {fileID: 8610865034569144732}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wings-removebg-preview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 6711996025558074335}
   - component: {fileID: 7277198297753027859}
   - component: {fileID: -4516145746253394108}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -189,13 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae389faadcf7794b9538f8f5a438656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status:
-    Lv_HP: 0
-    Lv_ATK: 0
-    Lv_DEF: 0
-    hp: 0
-    atk: 0
-    def_cnt: 0
 --- !u!114 &-2657497462634133472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7cd71f2da6191d439fdefd6d55834d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isJumpBtnDown: 0
+  isSlideBtnDown: 0
   state: 0
   GRAVITY: 3.5
   DownGraviry: 5
@@ -331,7 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6439336932976360245}
   - component: {fileID: 63163319230038390}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: InvincibleEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

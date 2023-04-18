@@ -41,14 +41,8 @@ public class UI_ChapterScene : UI_Scene
         {
             GameObject go = Managers.UI.MakeSubUI<UI_Chapter>(gridPanel.transform).gameObject;
             UI_Chapter chapter = Util.GetOrAddComponent<UI_Chapter>(go);
-            chapter.SetInfo($"CHAPTER {i + 1}", DataBase.GetChapter(i));
+            chapter.SetInfo($"CHAPTER {i + 1}", DataBase.Get<Chapter>(i));
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     void ShowTitleScene(PointerEventData data)
     {

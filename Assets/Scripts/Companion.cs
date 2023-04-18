@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class Companion : MonoBehaviour
 {
-    public GameObject player;
-
-    public float a = 0;
+    float a = 0;
 
     private void Start()
     {
-        player = GameManager.instance.go_Player;
+        // player = GameManager.instance.go_Player;
     }
 
     private void Update()
     {
         Moving();
-        GetCompanion();
     }
 
     public void Moving()
@@ -32,19 +29,13 @@ public class Companion : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = true;
         }
     }
-
-    public void GetCompanion()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        // float dist = Vector2.Distance(player.transform.position, transform.position);
-        ////Debug.Log(dist);
-        //if(dist < 2.2f)
-        //{
-        //    int atk = player.GetComponent<PlayerStatus>().ATK;
-        //    StartCoroutine(GUIManager.instance.NumberAnimation(atk + 50, atk, E_VALUE.ATK));
-        //    player.GetComponent<PlayerStatus>().ATK += 50;
-        //    // PlusStatus.instance.atk += 5;
-        //    // StageManager.instance.rescue += 1;
-        //    Destroy(this.gameObject);
-        //}
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerStatus>().PowerUP(50);
+            StageManager.Instance.rescue++;
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -27,6 +27,7 @@ public class Stage : DB
     // public int clearGold
     public int first_Gold;
     public int repeat_Gold;
+    public string bossName;
     public int bossHP;
     public string questType;
     public void Update_Info(int cnt, float percent, bool kill)
@@ -85,6 +86,7 @@ public class DataBase : MonoBehaviour
     [SerializeField] List<AtkEnhance> _atkEnhacne = new List<AtkEnhance>();
     [SerializeField] List<HpEnhance> _hpEnhacne = new List<HpEnhance>();
     [SerializeField] List<ShieldEnhance> _shieldEnhacne = new List<ShieldEnhance>();
+    [SerializeField] List<Quest> _quest = new List<Quest>();
     [SerializeField] UserInfo _userInfo;// = null;
     bool LoadData()
     {
@@ -108,15 +110,38 @@ public class DataBase : MonoBehaviour
         _shieldEnhacne = JsonConvert.DeserializeObject<List<ShieldEnhance>>(jsonShieldEnhanceFile.ToString());
         Bind<ShieldEnhance>(_shieldEnhacne);
 
-        string m_sSaveFileDirectory = Application.persistentDataPath;
-        Debug.Log(m_sSaveFileDirectory);
+        var jsonQuestDBFile = Resources.Load<TextAsset>("Database/QuestDB");
+        _quest = JsonConvert.DeserializeObject<List<Quest>>(jsonQuestDBFile.ToString());
+        Bind<Quest>(_quest);
 
+        //string m_sSaveFileDirectory = Application.persistentDataPath;
+        //Debug.Log(m_sSaveFileDirectory);
         //string jdata = File.ReadAllText("Assets/Resources/Database/UserDB.json");
+
         var jsonUserFile = Resources.Load<TextAsset>("Database/UserDB");
         _userInfo = JsonConvert.DeserializeObject<UserInfo>(jsonUserFile.ToString());
-        // Bind<UserInfo>(_userInfo);
 
         return true;
+    }
+    public static void Save(Stage stage)
+    {
+        int idx = stage.idx;
+        int chapter = idx / 5;
+        if (chapter + 1 < s_instance._chapters.Count) // 다음 챕터가 있으면,
+        {
+            int total = 0;
+            for (int i = 5 * chapter; i < 5 * chapter + 4; i++)
+            {
+                total += s_instance._stages[i].getStar;
+            }
+
+            if (10 <= total)
+            {
+                s_instance._chapters[chapter + 1].isOpen = true;
+            }
+        }
+        if (s_instance._stages[idx + 1].isOpen == false)
+            s_instance._stages[idx + 1].isOpen = true;
     }
     void Bind<T>(List<T> temp) where T: DB
     {
@@ -155,22 +180,5 @@ public class DataBase : MonoBehaviour
                 }
             }
         }
-    }
-    public static Chapter GetChapter(int idx)
-    {
-        return s_instance._chapters[idx];
-    }
-    public static Stage GetStage(int idx)
-    {
-        // idx 가 범위 값을 넘지 않으면.
-        return s_instance._stages[idx];
-    }
-    public static Enhance GetEnhance(int idx)
-    {
-        return s_instance._atkEnhacne[idx];
-    }
-    public static UserInfo GetUserInfo()
-    {
-        return s_instance._userInfo;
     }
 }

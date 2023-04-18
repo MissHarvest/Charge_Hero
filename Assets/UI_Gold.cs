@@ -26,7 +26,7 @@ public class UI_Gold : UI_Base
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Gold UI Start");
+        //Debug.Log("Gold UI Start");
         Init();
     }
     public void Consume(int val)
@@ -34,43 +34,26 @@ public class UI_Gold : UI_Base
         consume = val;
         int haveGold = DataBase.Get<UserInfo>().gold;
         int afterGold = haveGold - consume;
-        StartCoroutine(NumberAnimation(afterGold, haveGold, E_VALUE.GOLD));
+        StartCoroutine(NumberAnimation(GetText((int)Texts.Gold_Text), afterGold, haveGold, "{0:#,##0} G"));
     }
     // Update is called once per frame
     void Update()
     {
         
     }
-    public IEnumerator NumberAnimation(float target, float current, E_VALUE type)
+    IEnumerator NumberAnimation(Text text, float target, float current, string format)
     {
         float duration = 0.5f;// f_delay; // 카운팅에 걸리는 시간 설정. 
 
         float offset = (target - current) / duration; // 
-        yield return null;
+        
         while (current > target)
         {
             current += offset * Time.deltaTime;
-            switch (type)
-            {
-                case E_VALUE.GOLD:
-                    GetText((int)Texts.Gold_Text).text = string.Format("{0:#,##0} G", (int)current);
-                    break;
-                case E_VALUE.ATK:
-                    //txt_Atk.text = string.Format("{0:#,##0}", (int)current);
-                    break;
-            }
+            text.text = string.Format(format, (int)current);
             yield return null;
         }
         current = target;
-        //Debug.Log("Current/Target" + current + "/" + target);
-        switch (type)
-        {
-            case E_VALUE.GOLD:
-                GetText((int)Texts.Gold_Text).text = string.Format("{0:#,##0} G", (int)current);
-                break;
-            case E_VALUE.ATK:
-                //txt_Atk.text = string.Format("{0:#,##0}", (int)current);
-                break;
-        }
+        text.text = string.Format(format, (int)current);
     }
 }

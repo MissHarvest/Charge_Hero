@@ -39,7 +39,7 @@ public class UI_Enhance : UI_Base
         GetImage((int)Images.Status_Img).sprite = Managers.Resource.Load<Sprite>($"Images/{_name}");
 
         GetObject((int)GameObjects.Blocker).SetActive(false);
-        userinfo = DataBase.GetUserInfo();
+        userinfo = DataBase.Get<UserInfo>();
         GetButton((int)Buttons.Enhance_Btn).gameObject.EventBind(Enhance);
         // GetButton((int)Buttons.Enhance_Btn).gameObject.EventBind();
 
@@ -77,7 +77,7 @@ public class UI_Enhance : UI_Base
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Enhance UI Start");
+        //Debug.Log("Enhance UI Start");
         Init();
     }
 

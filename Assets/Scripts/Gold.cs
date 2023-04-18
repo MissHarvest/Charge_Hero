@@ -11,7 +11,7 @@ public class Gold : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameManager.instance.go_Player;
+        //player = GameManager.instance.go_Player;
     }
 
     // Update is called once per frame
